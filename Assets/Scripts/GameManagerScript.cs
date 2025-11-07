@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro; 
 
-public class CounterScript : MonoBehaviour
+public class GameManagerScript : MonoBehaviour
 //IInteractable
 {
     public GameObject player;

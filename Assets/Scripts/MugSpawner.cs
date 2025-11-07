@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSpawner : MonoBehaviour
+public class MugSpawner : MonoBehaviour
 {
     public string prefabFolderPath = "Prefabs";  // Path to prefabs in Resources folder (relative to "Assets/Resources/")
     private Dictionary<int, GameObject> prefabDictionary = new();
