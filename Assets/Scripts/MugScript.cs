@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class MugScript : MonoBehaviour
 {
-    public List<int> contents; // index 0 is amount of milk, index 1 is type of milk
-    // int 0 is whole milk, int 1 is almond milk, int 2 is oat milk
-    // amount of milk is 0 to 3
+    public List<int> contents; // index 0 is type of milk (0 - 3), index 1 is sugar added (0 - 1), index 2 is espresso added (0 - 1)
     GameObject player;
     bool playerIsClose = false;
     public GameObject mugHeld = null;

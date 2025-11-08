@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour
     private Material originalMaterial;
     private Renderer lastHighlightedRenderer;
 
-    private IInteractable nearestInteractable;
+    //private IInteractable nearestInteractable;
 
     private void Start()
     {
@@ -40,11 +40,11 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         Walk();
-        DetectInteractable();
-        if (nearestInteractable != null && Input.GetKeyDown(KeyCode.E))
-        {
-            nearestInteractable.Interact();
-        }
+        //DetectInteractable();
+        //if (nearestInteractable != null && Input.GetKeyDown(KeyCode.E))
+        //{
+        //    nearestInteractable.Interact();
+        //}
     }
 
     void Walk()
@@ -157,32 +157,32 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void DetectInteractable()
-    {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, interactionRange, interactableLayer);
-        float minDistance = float.MaxValue;
-        IInteractable closest = null;
-        Renderer closestRenderer = null;
+    //void DetectInteractable()
+    //{
+    //    RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, interactionRange, interactableLayer);
+    //    float minDistance = float.MaxValue;
+    //    IInteractable closest = null;
+    //    Renderer closestRenderer = null;
 
-        foreach (var hit in hits)
-        {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            Renderer renderer = hit.collider.GetComponent<Renderer>();
-            if (interactable != null)
-            {
-                float distance = Vector3.Distance(transform.position, hit.point);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    closest = interactable;
-                    closestRenderer = renderer;
-                }
-            }
-        }
+    //    foreach (var hit in hits)
+    //    {
+    //        IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+    //        Renderer renderer = hit.collider.GetComponent<Renderer>();
+    //        if (interactable != null)
+    //        {
+    //            float distance = Vector3.Distance(transform.position, hit.point);
+    //            if (distance < minDistance)
+    //            {
+    //                minDistance = distance;
+    //                closest = interactable;
+    //                closestRenderer = renderer;
+    //            }
+    //        }
+    //    }
 
-        nearestInteractable = closest;
-        Highlighting(closestRenderer);
-    }
+    //    nearestInteractable = closest;
+    //    Highlighting(closestRenderer);
+    //}
 }
 
 
