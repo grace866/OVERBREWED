@@ -7,8 +7,8 @@ public class GameManagerScript : MonoBehaviour
 //IInteractable
 {
     public GameObject player;
-    public OrderScript orders;
-    public TextMeshProUGUI currOrder;
+    private OrderScript orders;
+    private TextMeshProUGUI currOrder;
     public List<string> milkTypes;
     private int amt;
     private string type;
