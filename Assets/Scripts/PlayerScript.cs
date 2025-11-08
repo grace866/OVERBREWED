@@ -54,16 +54,19 @@ public class PlayerScript : MonoBehaviour
     void Walk()
     {
         float h = Input.GetAxis("Horizontal");
-    float v = Input.GetAxis("Vertical");
+        float v = Input.GetAxis("Vertical");
 
-    Vector3 input = new Vector3(h, 0f, v).normalized;
-    Vector3 horiz = input * speed;          // m/s
+        Vector3 input = new Vector3(h, 0f, v).normalized;
+        Vector3 horiz = input * speed;          // m/s
 
-    if (controller.isGrounded && velocity.y < 0f) velocity.y = -2f;
-    velocity.y += gravity * Time.deltaTime; // gravity < 0
+        if (controller.isGrounded && velocity.y < 0f) velocity.y = -2f;
+        velocity.y += gravity * Time.deltaTime; // gravity < 0
 
-    Vector3 disp = new Vector3(horiz.x, velocity.y, horiz.z) * Time.deltaTime; // meters this frame
-    controller.Move(disp);   
+        Vector3 disp = new Vector3(horiz.x, velocity.y, horiz.z) * Time.deltaTime; // meters this frame
+        controller.Move(disp);
+
+        if (input != Vector3.zero) playerBody.forward = input;
+
         // float horizontalInput = Input.GetAxis("Horizontal");
         // float verticalInput = Input.GetAxis("Vertical");
         // Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
@@ -75,7 +78,6 @@ public class PlayerScript : MonoBehaviour
 
         // // controller.Move((direction + velocity) * Time.deltaTime);
 
-        // if (direction != Vector3.zero) playerBody.forward = direction;
 
     }
     // void Walk()
