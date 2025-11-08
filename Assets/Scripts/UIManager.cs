@@ -7,46 +7,25 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
-
-
-
-public class uiscript : MonoBehaviour
-{
     public TextMeshProUGUI currOrder;
-    public void updateText(string type, int amt)
-    {
-        currOrder.text = "Current Order: \n Milk:" + type + "\n MilkAmt: " + amt;
-    }
-}
-     // for TextMeshPro
-
-public class TimerScript : MonoBehaviour
-{
-    // Start is called before the first frame update
     public float time = 120f;
     public bool runningTime = false;
     public string displayTime;
     public float tempTime;
     public TextMeshProUGUI timeDisplay;
-    public CounterScript counter;
+    public GameObject pauseMenuUI;
+    public Button resumeButton;
+    private bool isPaused = false;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         runningTime = true;
         tempTime = 0;
         displayTime = "2:00";
+        pauseMenuUI.SetActive(false); // Initially hide the pause menu
+        resumeButton.onClick.AddListener(Resume);
+
     }
 
     // Update is called once per frame
@@ -70,21 +49,12 @@ public class TimerScript : MonoBehaviour
             timeDisplay.text = displayTime;
         }
         Console.WriteLine(displayTime);
+
     }
 
-}
-
-public class PauseGameScript : MonoBehaviour
-{
-    public GameObject pauseMenuUI;
-    public Button resumeButton;
-
-    private bool isPaused = false;
-
-    void Start()
+    public void updateText(string type, int amt)
     {
-        pauseMenuUI.SetActive(false); // Initially hide the pause menu
-        resumeButton.onClick.AddListener(Resume);
+        currOrder.text = "Current Order: \n Milk:" + type + "\n MilkAmt: " + amt;
     }
 
     public void Pause()
@@ -96,7 +66,6 @@ public class PauseGameScript : MonoBehaviour
             isPaused = true;
         }
     }
-
     public void Resume()
     {
         Time.timeScale = 1;
@@ -104,5 +73,4 @@ public class PauseGameScript : MonoBehaviour
         isPaused = false;
     }
 }
-
 
