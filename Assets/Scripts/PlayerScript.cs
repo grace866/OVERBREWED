@@ -103,7 +103,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public ItemScript GetItemHeld()
+    /*public ItemScript GetItemHeld()
     {
         if (heldItem != null)
         {
@@ -118,7 +118,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
         return null;
-    }
+    }*/
 
     public void DropItem()
     {

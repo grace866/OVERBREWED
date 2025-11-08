@@ -13,9 +13,10 @@ public class MugSpawner : MonoBehaviour
         LoadAllPrefabs();
     }
 
+    
     // Load all prefabs from Resources/Prefabs folder
-    void LoadAllPrefabs()
-    {
+    void LoadAllPrefabs(){
+        /*
         // Load all prefabs in the specified folder
         GameObject[] prefabs = Resources.LoadAll<GameObject>(prefabFolderPath);
         
@@ -49,6 +50,6 @@ public class MugSpawner : MonoBehaviour
         else
         {
             Debug.LogError($"No prefab found for item ID {itemID}");
-        }
+        }*/
     }
 }
