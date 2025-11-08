@@ -59,6 +59,9 @@ public class GameManagerScript : MonoBehaviour
     private bool CheckOrder(OrderScript lastOrder, List<int> contents) 
     {
         // contents: index 0 is type of milk (0 - 3), index 1 is sugar added (0 - 1), index 2 is espresso added (0 - 1)
+        Debug.Log(lastOrder.milk);
+        Debug.Log(lastOrder.sugar);
+        foreach (int c in contents) Debug.Log(c);
         return (lastOrder.milk == contents[0] && contents[2] == 1 && lastOrder.sugar == contents[1]);
     }
 

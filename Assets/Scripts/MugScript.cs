@@ -12,6 +12,8 @@ public class MugScript : MonoBehaviour
     public Renderer mugRenderer;
     // Start is called before the first frame update
     private Vector3 originalPosition;
+    bool holdingBottle = false;
+    GameObject bottle;
 
     void Start()
     {
@@ -19,7 +21,6 @@ public class MugScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log("Player found: " + player); // this should not be null
         originalPosition = this.transform.position;
-
     }
 
     // Update is called once per frame
@@ -35,7 +36,13 @@ public class MugScript : MonoBehaviour
             {
                 PutDownMug();
             }
+        }
 
+        if (Input.GetKeyDown(KeyCode.P)) {
+            if (holdingBottle && playerIsClose)
+            {
+                PourMilk();
+            }
         }
     }
 
@@ -52,6 +59,11 @@ public class MugScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerIsClose = true;
+        }
+        if (other.gameObject.tag == "Bottle")
+        {
+            bottle = other.gameObject;
+            holdingBottle = true;
         }
     }
     
@@ -96,76 +108,18 @@ public class MugScript : MonoBehaviour
         holdingMug = false;
     }
 
-    public void addOatToMug()
+    void PourMilk()
     {
-        Debug.Log(contents.Count);
-        if (this != null && contents != null)
+        if (bottle.tag == "Whole")
         {
-            if (contents[1] != 2)
-            {
-                Debug.Log("milk amount: " + contents[0] + " and type of milk: " + contents[1]);
-                contents[1] = 2;
-                contents[0] = 1;
-            }
-            else
-            {
-                Debug.Log("incremented amount");
-                contents[0]++;
-            }
-        }
-        else
-        {
-            Debug.Log("not holding mug");
-        }
 
-    }
-
-    public void addAlmondToMug()
-    {
-        Debug.Log(contents.Count);
-        if (this != null && contents != null)
+        } else if (bottle.tag == "Almond")
         {
-            if (contents[1] != 1)
-            {
-                Debug.Log("milk amount: " + contents[0] + " and type of milk: " + contents[1]);
-                contents[1] = 1;
-                contents[0] = 1;
-            }
-            else
-            {
-                Debug.Log("incremented amount");
-                contents[0]++;
-            }
-        }
-        else
-        {
-            Debug.Log("not holding mug");
-        }
 
-    }
-
-    public void addWholeToMug()
-    {
-        Debug.Log(contents.Count);
-        if (this != null && contents != null)
+        } else if (bottle.tag == "Oat")
         {
-            if (contents[1] != 0)
-            {
-                Debug.Log("milk amount: " + contents[0] + " and type of milk: " + contents[1]);
-                contents[1] = 0;
-                contents[0] = 1;
-            }
-            else
-            {
-                Debug.Log("incremented amount");
-                contents[0]++;
-            }
-        }
-        else
-        {
-            Debug.Log("not holding mug");
-        }
 
+        }
     }
 
 }
