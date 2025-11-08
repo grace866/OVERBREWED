@@ -15,12 +15,16 @@ public class CoffeeMachineScript : MonoBehaviour
     private bool isKeyHeld = false;
 
     public MugScript currentMug = null;
+    [Header("Placement")]
+    public Transform holdPoint; // point where mug is placed in the machine
 
     private void Start() {
         player = GameObject.FindWithTag("Player");
         if (progressBar != null)
         {
+            progressBar.maxValue = brewingTime;
             progressBar.gameObject.SetActive(false);
+            progressBar.value = 0f;
         }
     }
 
@@ -29,8 +33,14 @@ public class CoffeeMachineScript : MonoBehaviour
         // player is in range & holding mug, coffee isn't already brewing
         if (isInRange && !isBrewing && !isCoffeeReady) 
         {
-            if (Input.GetKey(KeyCode.B)) 
+            if (Input.GetKey(KeyCode.B))
             {
+                var mugInHand = player ? player.GetComponentInChildren<MugScript>() : null;
+                if (mugInHand != null && SnapMugToMachine(mugInHand))
+                {
+                    StartBrewing();
+                    isKeyHeld = true;
+                }
                 StartBrewing();
                 isKeyHeld = true;
             }
@@ -49,6 +59,8 @@ public class CoffeeMachineScript : MonoBehaviour
         progressBar.gameObject.SetActive(true);
         progressBar.value = 0f;
         StartCoroutine(BrewCoffee());
+        // need to add snapping to machine
+
     }
 
     private void StopBrewing()
@@ -72,6 +84,7 @@ public class CoffeeMachineScript : MonoBehaviour
         currentMug.ChangeMugColor(Color.red);
         progressBar.gameObject.SetActive(false);
         Debug.Log("Coffee is ready! Pick it up.");
+        EjectMugFromMachine();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,6 +94,74 @@ public class CoffeeMachineScript : MonoBehaviour
             isInRange = true;
         }
         currentMug = player.GetComponentInChildren<MugScript>();
+    }
+
+    bool SnapMugToMachine(MugScript mug)
+    {
+        // If the player script tracks held item, drop it first so it’s no longer parented to the hand
+        var ps = player ? player.GetComponent<PlayerScript>() : null;
+        if (ps) ps.DropItem();
+
+        // Turn off physics while in machine
+        var rb = mug.GetComponent<Rigidbody>();
+        var cols = mug.GetComponents<Collider>();
+        if (rb)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+            rb.interpolation = RigidbodyInterpolation.None;
+            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        }
+        foreach (var c in cols) c.enabled = false;
+
+        // Parent & snap with world-scale preserved
+        mug.transform.SetParent(holdPoint, worldPositionStays: true);
+        mug.transform.position = holdPoint.position;
+        mug.transform.rotation = holdPoint.rotation;
+
+        // keep world scale: counter parent scale if needed
+        var pScale = holdPoint.lossyScale;
+        var wScale = mug.transform.lossyScale;
+        mug.transform.localScale = new Vector3(
+            wScale.x / Mathf.Max(pScale.x, 1e-6f),
+            wScale.y / Mathf.Max(pScale.y, 1e-6f),
+            wScale.z / Mathf.Max(pScale.z, 1e-6f));
+
+        currentMug = mug;
+        return true;
+    }
+
+    // Unparent and restore physics so the player can pick it up again
+    void EjectMugFromMachine()
+    {
+        if (!currentMug) return;
+
+        currentMug.transform.SetParent(null, true);
+
+        var rb = currentMug.GetComponent<Rigidbody>();
+        var cols = currentMug.GetComponents<Collider>();
+
+        foreach (var c in cols) c.enabled = true;
+
+        if (rb)
+        {
+            rb.isKinematic = false;
+            rb.detectCollisions = true;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            // small downward nudge so it settles
+            rb.linearVelocity = Vector3.down * 0.5f;
+        }
+
+        currentMug = null;
+    }
+
+
+    private void OnTriggerStay(Collider other) // helps when colliders re-enable while overlapping
+    {
+        if (other.CompareTag("Player")) isInRange = true;
     }
 
     private void OnTriggerExit(Collider other)

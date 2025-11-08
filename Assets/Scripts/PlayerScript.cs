@@ -138,7 +138,7 @@ public class PlayerScript : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
 
             rb.isKinematic = true;                                   // no physics so it cant move on its on
-            rb.detectCollisions = false;                             // and disable collider 
+            rb.detectCollisions = true;                             // and disable collider 
             rb.interpolation = RigidbodyInterpolation.None;          // important
             rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
         }
