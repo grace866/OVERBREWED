@@ -31,7 +31,7 @@ public class CoffeeMachineScript : MonoBehaviour
     private void Update()
     {
         // player is in range & holding mug, coffee isn't already brewing
-        if (isInRange && !isBrewing && !isCoffeeReady && Input.GetKeyDown(KeyCode.E)) 
+        if (isInRange && !isBrewing && !isCoffeeReady && Input.GetKeyDown(KeyCode.B)) 
         {
                 var mugInHand = player ? player.GetComponentInChildren<MugScript>() : null;
                 if (mugInHand != null && SnapMugToMachine(mugInHand))
@@ -39,11 +39,9 @@ public class CoffeeMachineScript : MonoBehaviour
                     StartBrewing();
                     isKeyHeld = true;
                 }
-                StartBrewing();
-                isKeyHeld = true;
             
         }
-        else if (isKeyHeld && Input.GetKeyUp(KeyCode.E))
+        else if (isKeyHeld && Input.GetKeyUp(KeyCode.B))
         {
             StopBrewing();
             isKeyHeld = false;
@@ -109,6 +107,9 @@ public class CoffeeMachineScript : MonoBehaviour
         mug.transform.SetParent(holdPoint, worldPositionStays: false);
         mug.transform.localPosition = Vector3.zero;
         mug.transform.localRotation = Quaternion.identity;
+        Debug.Log($"Snapped {mug.name} to {holdPoint.name} at {holdPoint.position}");
+        Debug.Log($"Mug in hand? {player.GetComponentInChildren<MugScript>() != null}");
+
         mug.transform.localScale = Vector3.one;
 
         currentMug = mug;
