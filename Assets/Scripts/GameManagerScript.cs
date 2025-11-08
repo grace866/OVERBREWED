@@ -16,7 +16,7 @@ public class GameManagerScript : MonoBehaviour
     public TextMeshProUGUI scoreDisplay;
     private void Start()
     {
-        orders = FindObjectOfType<OrderScript>();
+        orders = new OrderScript();
         player = GameObject.FindWithTag("Player");
 
         milkTypes = orders.milkType;
