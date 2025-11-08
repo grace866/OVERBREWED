@@ -29,10 +29,12 @@ public class MugScript : MonoBehaviour
         {
             if (!holdingMug && playerIsClose)
             {
+                Debug.Log("Picking up mug");
                 PickupMug();
             }
             else if (holdingMug) 
             {
+                Debug.Log("Putting down mug");
                 PutDownMug();
             }
 
