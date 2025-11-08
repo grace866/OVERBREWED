@@ -39,10 +39,10 @@ public class BottleScript : MonoBehaviour
         }
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.CompareTag("Player")) playerIsClose = true;
-    //}
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player")) playerIsClose = true;
+    }
 
     private void OnTriggerExit(Collider other)
     {

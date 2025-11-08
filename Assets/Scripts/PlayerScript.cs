@@ -62,10 +62,10 @@ public class PlayerScript : MonoBehaviour
         if (controller.isGrounded && velocity.y < 0f) velocity.y = -2f;
         velocity.y += gravity * Time.deltaTime; // gravity < 0
 
-        Vector3 disp = new Vector3(horiz.x, velocity.y, horiz.z) * Time.deltaTime; // meters this frame
+        Vector3 disp = new Vector3(-horiz.x, velocity.y, -horiz.z) * Time.deltaTime; // meters this frame
         controller.Move(disp);
 
-        if (input != Vector3.zero) playerBody.forward = input;
+        if (input != Vector3.zero) playerBody.forward = -input;
 
         // float horizontalInput = Input.GetAxis("Horizontal");
         // float verticalInput = Input.GetAxis("Vertical");
