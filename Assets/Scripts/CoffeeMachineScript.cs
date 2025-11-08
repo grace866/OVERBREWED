@@ -31,10 +31,8 @@ public class CoffeeMachineScript : MonoBehaviour
     private void Update()
     {
         // player is in range & holding mug, coffee isn't already brewing
-        if (isInRange && !isBrewing && !isCoffeeReady) 
+        if (isInRange && !isBrewing && !isCoffeeReady && Input.GetKeyDown(KeyCode.E)) 
         {
-            if (Input.GetKey(KeyCode.B))
-            {
                 var mugInHand = player ? player.GetComponentInChildren<MugScript>() : null;
                 if (mugInHand != null && SnapMugToMachine(mugInHand))
                 {
@@ -43,9 +41,9 @@ public class CoffeeMachineScript : MonoBehaviour
                 }
                 StartBrewing();
                 isKeyHeld = true;
-            }
+            
         }
-        else if (Input.GetKeyUp(KeyCode.B) && isKeyHeld)
+        else if (isKeyHeld && Input.GetKeyUp(KeyCode.E))
         {
             StopBrewing();
             isKeyHeld = false;
@@ -87,15 +85,6 @@ public class CoffeeMachineScript : MonoBehaviour
         EjectMugFromMachine();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            isInRange = true;
-        }
-        currentMug = player.GetComponentInChildren<MugScript>();
-    }
-
     bool SnapMugToMachine(MugScript mug)
     {
         // If the player script tracks held item, drop it first so it’s no longer parented to the hand
@@ -116,18 +105,11 @@ public class CoffeeMachineScript : MonoBehaviour
         }
         foreach (var c in cols) c.enabled = false;
 
-        // Parent & snap with world-scale preserved
-        mug.transform.SetParent(holdPoint, worldPositionStays: true);
-        mug.transform.position = holdPoint.position;
-        mug.transform.rotation = holdPoint.rotation;
-
-        // keep world scale: counter parent scale if needed
-        var pScale = holdPoint.lossyScale;
-        var wScale = mug.transform.lossyScale;
-        mug.transform.localScale = new Vector3(
-            wScale.x / Mathf.Max(pScale.x, 1e-6f),
-            wScale.y / Mathf.Max(pScale.y, 1e-6f),
-            wScale.z / Mathf.Max(pScale.z, 1e-6f));
+        // Parent & snap 
+        mug.transform.SetParent(holdPoint, worldPositionStays: false);
+        mug.transform.localPosition = Vector3.zero;
+        mug.transform.localRotation = Quaternion.identity;
+        mug.transform.localScale = Vector3.one;
 
         currentMug = mug;
         return true;
@@ -157,6 +139,15 @@ public class CoffeeMachineScript : MonoBehaviour
 
         currentMug = null;
     }
+
+    private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                isInRange = true;
+            }
+            // currentMug = player.GetComponentInChildren<MugScript>();
+        }
 
 
     private void OnTriggerStay(Collider other) // helps when colliders re-enable while overlapping

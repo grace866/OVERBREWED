@@ -3635,7 +3635,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 2}
+  m_Size: {x: 1, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &947940249
 MeshRenderer:
@@ -3842,6 +3842,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 544a32dcabd1d49a7a5c92f00cf18d67, type: 3}
       propertyPath: m_Name
       value: coffee_shop
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702949161529035534, guid: 544a32dcabd1d49a7a5c92f00cf18d67, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
