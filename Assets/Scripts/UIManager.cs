@@ -1,4 +1,9 @@
 using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,10 +20,7 @@ public class UIManager : MonoBehaviour
     }
 }
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+
 
 public class uiscript : MonoBehaviour
 {
@@ -28,13 +30,7 @@ public class uiscript : MonoBehaviour
         currOrder.text = "Current Order: \n Milk:" + type + "\n MilkAmt: " + amt;
     }
 }
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;           // for TextMeshPro
+     // for TextMeshPro
 
 public class TimerScript : MonoBehaviour
 {
@@ -77,11 +73,6 @@ public class TimerScript : MonoBehaviour
     }
 
 }
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 
 public class PauseGameScript : MonoBehaviour
 {

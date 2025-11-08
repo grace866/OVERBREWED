@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -14,10 +16,6 @@ public class PlayerScript : MonoBehaviour
         
     }
 }
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -87,11 +85,6 @@ public class PlayerMovementScript : MonoBehaviour
 
     }
 }
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerItemHold : MonoBehaviour
 {
     private GameObject heldItem = null;
@@ -139,11 +132,6 @@ public class PlayerItemHold : MonoBehaviour
         }
     }
 }
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerInteraction : MonoBehaviour
 {
     public float interactionRange = 3f; // Max distance for interaction
