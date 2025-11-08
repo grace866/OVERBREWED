@@ -10,7 +10,6 @@ public class OrderScript : MonoBehaviour
     private List<int> milkAmt;
     private List<int> milkTypeNum;
     private List<int> currentServed;
-    public ScoreScript score;
     // Start is called before the first frame update
     void Awake()
     {
