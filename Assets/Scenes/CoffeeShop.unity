@@ -3289,7 +3289,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.303, y: 0, z: 0.798}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 596964000}
@@ -4326,7 +4326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 538a8b2a70cf24de2a76ee28e0b4e501, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.445
+      value: -0.34499997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 538a8b2a70cf24de2a76ee28e0b4e501, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4424,7 +4424,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.8, z: 0.3}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1029424709
 BoxCollider:
@@ -4445,7 +4445,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.8, z: 0.3}
+  m_Size: {x: 8, y: 2, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1029424710
 Rigidbody:
@@ -4473,7 +4473,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1 &1029543157
 GameObject:
   m_ObjectHideFlags: 0
@@ -4795,7 +4795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 538a8b2a70cf24de2a76ee28e0b4e501, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.136
+      value: -0.17399997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 538a8b2a70cf24de2a76ee28e0b4e501, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4893,7 +4893,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.8, z: 0.3}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1091224118
 BoxCollider:
@@ -4914,7 +4914,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.8, z: 0.3}
+  m_Size: {x: 8, y: 2, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1091224119
 Rigidbody:
@@ -4942,7 +4942,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1001 &1165785784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7259,7 +7259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 538a8b2a70cf24de2a76ee28e0b4e501, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.161
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 538a8b2a70cf24de2a76ee28e0b4e501, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7357,7 +7357,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.8, z: 0.3}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1979032480
 BoxCollider:
@@ -7378,7 +7378,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.8, z: 0.3}
+  m_Size: {x: 8, y: 2, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1979032481
 Rigidbody:

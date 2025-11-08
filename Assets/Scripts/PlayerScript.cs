@@ -147,7 +147,17 @@ public class PlayerScript : MonoBehaviour
         heldItem.transform.SetParent(holdPoint, worldPositionStays: false);
         heldItem.transform.localPosition = Vector3.zero;
         heldItem.transform.localRotation = Quaternion.identity;
-        heldItem.transform.localScale    = Vector3.one;
+        //heldItem.transform.localScale = Vector3.one;
+        Vector3 targetScale = Vector3.one;
+        if (item.GetComponent<BottleScript>() != null)
+        {
+            targetScale = new Vector3(8f, 8f, 8f);
+        }
+        else if (item.GetComponent<MugScript>() != null)
+        {
+            targetScale = new Vector3(1.4f, 1.4f, 1.4f);
+        }
+        heldItem.transform.localScale = targetScale;
     }
 
     /*public ItemScript GetItemHeld()
