@@ -31,25 +31,30 @@ public class CoffeeMachineScript : MonoBehaviour
     private void Update()
     {
         // player is in range & holding mug, coffee isn't already brewing
-        if (isInRange && !isBrewing && !isCoffeeReady && Input.GetKeyDown(KeyCode.B)) 
+        if (isInRange && !isBrewing && !isCoffeeReady && Input.GetKeyDown(KeyCode.B) && player.GetComponentInChildren<MugScript>() != null) 
         {
-                var mugInHand = player ? player.GetComponentInChildren<MugScript>() : null;
-                if (mugInHand != null && SnapMugToMachine(mugInHand))
-                {
-                    StartBrewing();
-                    isKeyHeld = true;
-                }
+            Debug.Log("in range with mug");
+            var mugInHand = player.GetComponentInChildren<MugScript>();
+            Debug.Log(mugInHand);
+            Debug.Log(SnapMugToMachine(mugInHand));
+            if (mugInHand != null && SnapMugToMachine(mugInHand))
+            {
+                StartBrewing();
+                isKeyHeld = true;
+            }
             
         }
         else if (isKeyHeld && Input.GetKeyUp(KeyCode.B))
         {
             StopBrewing();
             isKeyHeld = false;
+
         }
     }
 
     public void StartBrewing()
     {
+        Debug.Log("brewing started");
         isBrewing = true;
         brewingProgress = 0f;
         progressBar.gameObject.SetActive(true);
@@ -68,13 +73,13 @@ public class CoffeeMachineScript : MonoBehaviour
 
     private IEnumerator BrewCoffee()
     {
+        Debug.Log("in ienumerator");
         while (brewingProgress < brewingTime)
         {
             brewingProgress += Time.deltaTime;
             progressBar.value = brewingProgress;
             yield return null;
         }
-
         isCoffeeReady = true;
         isBrewing = false;
         currentMug.ChangeMugColor(Color.red);
@@ -85,6 +90,7 @@ public class CoffeeMachineScript : MonoBehaviour
 
     bool SnapMugToMachine(MugScript mug)
     {
+        Debug.Log("in snapmugtomachine");
         // If the player script tracks held item, drop it first so it’s no longer parented to the hand
         var ps = player ? player.GetComponent<PlayerScript>() : null;
         if (ps) ps.DropItem();
@@ -103,14 +109,14 @@ public class CoffeeMachineScript : MonoBehaviour
         }
         foreach (var c in cols) c.enabled = false;
 
-        // Parent & snap 
+        // Parent & snap
         mug.transform.SetParent(holdPoint, worldPositionStays: false);
         mug.transform.localPosition = Vector3.zero;
         mug.transform.localRotation = Quaternion.identity;
         Debug.Log($"Snapped {mug.name} to {holdPoint.name} at {holdPoint.position}");
         Debug.Log($"Mug in hand? {player.GetComponentInChildren<MugScript>() != null}");
 
-        mug.transform.localScale = Vector3.one;
+        mug.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
 
         currentMug = mug;
         return true;
@@ -121,21 +127,25 @@ public class CoffeeMachineScript : MonoBehaviour
     {
         if (!currentMug) return;
 
-        currentMug.transform.SetParent(null, true);
+        currentMug.transform.SetParent(null);
 
         var rb = currentMug.GetComponent<Rigidbody>();
         var cols = currentMug.GetComponents<Collider>();
+
+        Vector3 ejectionDirection = holdPoint.forward;
+        float ejectionForce = 3.0f; // Adjust this value to control how far it pushes
 
         foreach (var c in cols) c.enabled = true;
 
         if (rb)
         {
             rb.isKinematic = false;
+            rb.linearVelocity = ejectionDirection * ejectionForce;
             rb.detectCollisions = true;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             // small downward nudge so it settles
-            rb.linearVelocity = Vector3.down * 0.5f;
+            //rb.linearVelocity = Vector3.down * 0.5f;
         }
 
         currentMug = null;
@@ -143,10 +153,11 @@ public class CoffeeMachineScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Mug")
             {
                 isInRange = true;
-            }
+                Debug.Log("is in range");
+        }
             // currentMug = player.GetComponentInChildren<MugScript>();
         }
 

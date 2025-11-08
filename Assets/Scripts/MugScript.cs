@@ -39,6 +39,9 @@ public class MugScript : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.P)) {
+            Debug.Log("P pressed");
+            Debug.Log(holdingBottle);
+            Debug.Log(playerIsClose);
             if (holdingBottle && playerIsClose)
             {
                 PourMilk();
@@ -62,6 +65,7 @@ public class MugScript : MonoBehaviour
         }
         if (other.gameObject.tag == "Bottle")
         {
+            Debug.Log("holding bottle");
             bottle = other.gameObject;
             holdingBottle = true;
         }
@@ -82,6 +86,7 @@ public class MugScript : MonoBehaviour
 
     void PickupMug()
     {
+        Debug.Log("in pick up mug");
         var ps = player.GetComponent<PlayerScript>();
         if (ps == null || !ps.CanHoldItem()) return;
 
@@ -110,15 +115,16 @@ public class MugScript : MonoBehaviour
 
     void PourMilk()
     {
+        Debug.Log("added milk");
         if (bottle.tag == "Whole")
         {
-
+            contents[0] = 1;
         } else if (bottle.tag == "Almond")
         {
-
+            contents[0] = 2;
         } else if (bottle.tag == "Oat")
         {
-
+            contents[0] = 3;
         }
     }
 

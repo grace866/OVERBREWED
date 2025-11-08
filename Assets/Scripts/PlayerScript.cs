@@ -151,11 +151,11 @@ public class PlayerScript : MonoBehaviour
         Vector3 targetScale = Vector3.one;
         if (item.GetComponent<BottleScript>() != null)
         {
-            targetScale = new Vector3(8f, 8f, 8f);
+            targetScale = new Vector3(6f, 6f, 6f);
         }
         else if (item.GetComponent<MugScript>() != null)
         {
-            targetScale = new Vector3(1.4f, 1.4f, 1.4f);
+            targetScale = new Vector3(0.8f, 0.8f, 0.8f);
         }
         heldItem.transform.localScale = targetScale;
     }
