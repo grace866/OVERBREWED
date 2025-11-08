@@ -5,23 +5,12 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
-
-public class PlayerMovementScript : MonoBehaviour
-{
 
     Animator animator;
     CharacterController controller;
+
+    private GameObject heldItem = null;
+    public Transform holdPoint; // Assign an empty GameObject as the hand position
 
     public Transform playerBody;
 
@@ -33,6 +22,14 @@ public class PlayerMovementScript : MonoBehaviour
 
     private Vector3 velocity;
 
+    public float interactionRange = 3f; // Max distance for interaction
+    public LayerMask interactableLayer; // Assign Interactable layer in Inspector
+    public Material highlightMaterial;
+    private Material originalMaterial;
+    private Renderer lastHighlightedRenderer;
+
+    private IInteractable nearestInteractable;
+
     private void Start()
     {
         controller = playerBody.GetComponent<CharacterController>();
@@ -43,6 +40,11 @@ public class PlayerMovementScript : MonoBehaviour
     void Update()
     {
         Walk();
+        DetectInteractable();
+        if (nearestInteractable != null && Input.GetKeyDown(KeyCode.E))
+        {
+            nearestInteractable.Interact();
+        }
     }
 
     void Walk()
@@ -84,11 +86,6 @@ public class PlayerMovementScript : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
     }
-}
-public class PlayerItemHold : MonoBehaviour
-{
-    private GameObject heldItem = null;
-    public Transform holdPoint; // Assign an empty GameObject as the hand position
 
     public bool CanHoldItem()
     {
@@ -129,26 +126,6 @@ public class PlayerItemHold : MonoBehaviour
         {
             heldItem.transform.SetParent(null);
             heldItem = null;
-        }
-    }
-}
-public class PlayerInteraction : MonoBehaviour
-{
-    public float interactionRange = 3f; // Max distance for interaction
-    public LayerMask interactableLayer; // Assign Interactable layer in Inspector
-    public Material highlightMaterial;
-    private Material originalMaterial;
-    private Renderer lastHighlightedRenderer;
-
-    private IInteractable nearestInteractable;
-    //public Transform playerBody;
-
-    void Update()
-    {
-        DetectInteractable();
-        if (nearestInteractable != null && Input.GetKeyDown(KeyCode.E))
-        {
-            nearestInteractable.Interact();
         }
     }
 
@@ -207,6 +184,5 @@ public class PlayerInteraction : MonoBehaviour
         Highlighting(closestRenderer);
     }
 }
-
 
 
