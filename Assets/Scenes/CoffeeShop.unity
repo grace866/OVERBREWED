@@ -749,15 +749,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 20d22d8ffe71a4dc7b4840dc7af36068, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.54
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 20d22d8ffe71a4dc7b4840dc7af36068, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27
+      value: 1.34
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 20d22d8ffe71a4dc7b4840dc7af36068, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.25
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 20d22d8ffe71a4dc7b4840dc7af36068, type: 3}
       propertyPath: m_LocalRotation.w
@@ -794,6 +794,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 65702495048144492, guid: 08d3054684ad445368b19ea9443c0616, type: 3}
+    - {fileID: 65702495048144492, guid: 20d22d8ffe71a4dc7b4840dc7af36068, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d22d8ffe71a4dc7b4840dc7af36068, type: 3}
@@ -2637,8 +2638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ae62a45e51011409f2dde5d26efbb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 1090107221}
-  resumeButton: {fileID: 245100822}
 --- !u!114 &775898246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4217,11 +4216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296d1071fa803574ba9045b44be1f347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBody: {fileID: 1195073896}
-  speed: 3
-  acceleration: 12
-  decelerationFactor: 1
-  gravity: -9.81
 --- !u!4 &1195073896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 102dd21c8ea864c05bebb70c114b2a7f, type: 3}
@@ -5338,10 +5332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2236b612dd6f28b42a60dfb8922394c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 1561263748}
-  timeLeft: 120
-  gameEnd: 0
-  ball: {fileID: 0}
 --- !u!1 &1588822410
 GameObject:
   m_ObjectHideFlags: 0
