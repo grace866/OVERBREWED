@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 
 // using System.Threading.Tasks.Dataflow;
@@ -12,7 +11,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     Animator animator;
-    Rigidbody rb;
+    CharacterController controller;
 
     private GameObject heldItem = null;
     public Transform holdPoint; // Assign an empty GameObject as the hand position
@@ -27,8 +26,6 @@ public class PlayerScript : MonoBehaviour
 
     private Vector3 velocity;
 
-    private Vector3 inputDir;
-
     public float interactionRange = 3f; // Max distance for interaction
     public LayerMask interactableLayer; // Assign Interactable layer in Inspector
     public Material highlightMaterial;
@@ -39,17 +36,14 @@ public class PlayerScript : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
         animator = playerBody ? playerBody.GetComponent<Animator>() : null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-    float v = Input.GetAxisRaw("Vertical");
-    inputDir = new Vector3(h, 0f, v).normalized;
-        // Walk();
+        Walk();
         //DetectInteractable();
         //if (nearestInteractable != null && Input.GetKeyDown(KeyCode.E))
         //{
@@ -57,44 +51,22 @@ public class PlayerScript : MonoBehaviour
         //}
     }
 
-    void FixedUpdate()
-{
-    // current planar velocity (XZ only)
-    Vector3 vel = rb.linearVelocity;
-    Vector3 planar = new Vector3(vel.x, 0f, vel.z);
+    void Walk()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
+        transform.Translate(direction * speed * Time.deltaTime, Space.World);
 
-    // target planar velocity from input
-    Vector3 target = inputDir * speed;
+        if (controller.isGrounded && velocity.y < 0f) velocity.y = -2f;
 
-    // accelerate toward target (nice feel)
-    float accel = (inputDir.sqrMagnitude > 0.01f) ? acceleration
-                                                  : acceleration * decelerationFactor;
-    planar = Vector3.MoveTowards(planar, target, accel * Time.fixedDeltaTime);
+        // velocity.y += gravity * Time.deltaTime;
 
-    // apply: keep gravity-driven Y from the rigidbody
-    rb.linearVelocity = new Vector3(planar.x, vel.y, planar.z);
+        // controller.Move((direction + velocity) * Time.deltaTime);
 
-    // face move direction (horizontal only)
-    if (inputDir.sqrMagnitude > 0.001f)
-        playerBody.forward = inputDir;
-}
+        if (direction != Vector3.zero) playerBody.forward = direction;
 
-    // void Walk()
-    // {
-    //     float horizontalInput = Input.GetAxis("Horizontal");
-    //     float verticalInput = Input.GetAxis("Vertical");
-    //     inputDir = new Vector3(horizontalInput, 0, verticalInput).normalized;
-    //     transform.Translate(direction * speed * Time.deltaTime, Space.World);
-
-    //     if (controller.isGrounded && velocity.y < 0f) velocity.y = -2f;
-
-    //     velocity.y += gravity * Time.deltaTime;
-
-    //     rb.Move((direction + velocity) * Time.deltaTime);
-
-    //     if (direction != Vector3.zero) playerBody.forward = direction;
-
-    // }
+    }
     // void Walk()
     // {
     //     float horizontalInput = Input.GetAxis("Horizontal");
