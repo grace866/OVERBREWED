@@ -128,13 +128,26 @@ public class PlayerScript : MonoBehaviour
 
     public void HoldItem(GameObject item)
     {
-        if (heldItem == null)
+
+        if (heldItem != null || !holdPoint) return;
+        heldItem = item;
+
+        if (item.TryGetComponent<Rigidbody>(out var rb))
         {
-            heldItem = item;
-            heldItem.transform.SetParent(holdPoint);
-            heldItem.transform.localPosition = Vector3.zero;
-            heldItem.transform.localRotation = Quaternion.identity;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            rb.isKinematic = true;                                   // no physics
+            rb.detectCollisions = false;                             // or disable collider
+            rb.interpolation = RigidbodyInterpolation.None;          // ⬅️ important
+            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
         }
+        if (item.TryGetComponent<Collider>(out var col)) col.enabled = false;
+
+        heldItem.transform.SetParent(holdPoint, worldPositionStays: false);
+        heldItem.transform.localPosition = Vector3.zero;
+        heldItem.transform.localRotation = Quaternion.identity;
+        heldItem.transform.localScale    = Vector3.one;
     }
 
     /*public ItemScript GetItemHeld()
@@ -156,11 +169,52 @@ public class PlayerScript : MonoBehaviour
 
     public void DropItem()
     {
-        if (heldItem != null)
-        {
-            heldItem.transform.SetParent(null);
-            heldItem = null;
-        }
+        // if (heldItem != null)
+        // {
+        //     heldItem.transform.SetParent(null);
+        //     heldItem = null;
+        // }
+
+        // if (!heldItem) return;
+
+        // heldItem.transform.SetParent(null, true);
+
+        // // turn physics back ON
+        // if (heldItem.TryGetComponent<Rigidbody>(out var rb))
+        // {
+        //     rb.isKinematic = false;
+        //     rb.detectCollisions = true;
+        // }
+        // if (heldItem.TryGetComponent<Collider>(out var col))
+        //     col.enabled = true;
+
+        // heldItem = null;
+
+        // if (!heldItem) return;
+
+        // // unparent first
+        // heldItem.transform.SetParent(null, true);
+
+        // // re-enable physics
+        // if (heldItem.TryGetComponent<Rigidbody>(out var rb)) { rb.isKinematic = false; rb.detectCollisions = true; }
+        // if (heldItem.TryGetComponent<Collider>(out var col))  col.enabled = true;
+
+        // heldItem = null;
+
+        if (!heldItem) return;
+
+    heldItem.transform.SetParent(null, true);
+
+    if (heldItem.TryGetComponent<Rigidbody>(out var rb))
+    {
+        rb.isKinematic = false;
+        rb.detectCollisions = true;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;   // back on
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+    }
+    if (heldItem.TryGetComponent<Collider>(out var col)) col.enabled = true;
+
+    heldItem = null;
     }
 
     void Highlighting(Renderer objRenderer)

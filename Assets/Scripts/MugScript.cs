@@ -29,12 +29,10 @@ public class MugScript : MonoBehaviour
         {
             if (!holdingMug && playerIsClose)
             {
-                Debug.Log("Picking up mug");
                 PickupMug();
             }
             else if (holdingMug) 
             {
-                Debug.Log("Putting down mug");
                 PutDownMug();
             }
 
@@ -51,11 +49,16 @@ public class MugScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             playerIsClose = true;
         }
     }
+    
+    private void OnTriggerStay(Collider other)  
+{
+    if (other.CompareTag("Player")) playerIsClose = true;
+}
 
     private void OnTriggerExit(Collider other)
     {
@@ -67,18 +70,30 @@ public class MugScript : MonoBehaviour
 
     void PickupMug()
     {
-        mugHeld = this.gameObject;
-        this.transform.SetParent(player.transform);
-        this.transform.localPosition = new Vector3((float)(transform.localPosition.x + 0.5), (float)(transform.localPosition.y + 1.5), (float)(transform.localPosition.z));
+        var ps = player.GetComponent<PlayerScript>();
+        if (ps == null || !ps.CanHoldItem()) return;
+
+        ps.HoldItem(gameObject);   // this snaps to holdPoint, the hand cube i added on Egg
         holdingMug = true;
     }
 
     void PutDownMug()
     {
-        mugHeld = null;
-        this.transform.SetParent(null);
+        transform.SetParent(null);
+
+        if (TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.isKinematic = false;
+            rb.detectCollisions = true;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        }
+        foreach (var c in GetComponents<Collider>()) c.enabled = true;  // re-enable
+
+        var ps = player.GetComponent<PlayerScript>();
+        if (ps) ps.DropItem();
+
         holdingMug = false;
-        //this.transform.position = originalPosition;
     }
 
     public void addOatToMug()
