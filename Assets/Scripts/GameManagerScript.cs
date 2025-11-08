@@ -9,7 +9,7 @@ public class GameManagerScript : MonoBehaviour
 {
     public GameObject player;
     private List<OrderScript> orders;
-    private TextMeshProUGUI currOrderText;
+    public TextMeshProUGUI currOrderText;
     public int score;
     public TextMeshProUGUI scoreDisplay;
     private OrderScript currOrder;
