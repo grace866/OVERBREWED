@@ -110,13 +110,13 @@ public class CoffeeMachineScript : MonoBehaviour
         foreach (var c in cols) c.enabled = false;
 
         // Parent & snap
-        mug.transform.SetParent(holdPoint, worldPositionStays: false);
+        mug.transform.SetParent(holdPoint, worldPositionStays: true);
         mug.transform.localPosition = Vector3.zero;
         mug.transform.localRotation = Quaternion.identity;
         Debug.Log($"Snapped {mug.name} to {holdPoint.name} at {holdPoint.position}");
         Debug.Log($"Mug in hand? {player.GetComponentInChildren<MugScript>() != null}");
 
-        mug.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        //mug.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
 
         currentMug = mug;
         return true;
@@ -127,8 +127,11 @@ public class CoffeeMachineScript : MonoBehaviour
     {
         if (!currentMug) return;
 
+        //Vector3 targetScale = Vector3.one;
+        //targetScale = new Vector3(0.8f, 0.8f, 0.8f);
+        //currentMug.transform.localScale = targetScale;
         currentMug.transform.SetParent(null);
-
+        
         var rb = currentMug.GetComponent<Rigidbody>();
         var cols = currentMug.GetComponents<Collider>();
 
