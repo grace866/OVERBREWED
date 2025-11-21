@@ -3,27 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem.Controls;
+using UnityEditor.Build.Player;
 
 public class GameManagerScript : MonoBehaviour
 //IInteractable
 {
     public GameObject player;
     private List<OrderScript> orders;
-    public TextMeshProUGUI currOrderText;
+    //public TextMeshProUGUI currOrderText;
     public int score;
-    public TextMeshProUGUI scoreDisplay;
+    //public TextMeshProUGUI scoreDisplay;
     private OrderScript currOrder;
+    private UIManager UIManager;
+    private bool isOrderCorrect = false;
+
     private void Start()
     {
         orders = new List<OrderScript>();
         GenerateOrder();
         player = GameObject.FindWithTag("Player");
 
-        scoreDisplay.text = "Score: 0";
-        UpdateCurrOrderUI();
+        UpdateCurrOrder();
     }
 
-    private void UpdateCurrOrderUI()
+    //private void Update()
+    //{
+        
+    //}
+    private void UpdateCurrOrder()
     {
         currOrder = orders[0];
         string milk;
@@ -34,8 +41,7 @@ public class GameManagerScript : MonoBehaviour
         else milk = "Oat";
         if (currOrder.sugar == 1) sugar = "Sugar added";
         else sugar = "No sugar";
-
-        currOrderText.text = "Current Order: \n Milk:" + milk + "\n Sugar: " + sugar;
+        UIManager.updateOrderText(milk, sugar);
 
     }
     private void OnTriggerEnter(Collider other)
@@ -49,34 +55,24 @@ public class GameManagerScript : MonoBehaviour
 
             // compare currOrder with submitted order
             currOrder = orders[0]; 
-            AssignPoints(CheckOrder(currOrder, contents));
+            CheckOrder(currOrder, contents);
             orders.RemoveAt(0);
-            UpdateCurrOrderUI();
+            UpdateCurrOrder();
             Debug.Log("Mug placed on the counter!");
         }
     }
 
-    private bool CheckOrder(OrderScript lastOrder, List<int> contents) 
+    private void CheckOrder(OrderScript lastOrder, List<int> contents) 
     {
         // contents: index 0 is type of milk (0 - 3), index 1 is sugar added (0 - 1), index 2 is espresso added (0 - 1)
         Debug.Log(lastOrder.milk);
         Debug.Log(lastOrder.sugar);
         foreach (int c in contents) Debug.Log(c);
-        return (lastOrder.milk == contents[0] && contents[2] == 1 && lastOrder.sugar == contents[1]);
-    }
-
-    private void AssignPoints(bool isOrderCorrect)
-    {
-        Debug.Log("points assigned");
-        if (isOrderCorrect)
+        if (lastOrder.milk == contents[0] && contents[2] == 1 && lastOrder.sugar == contents[1])
         {
-            score += 10;
+            score += 1;
+            UIManager.updateScoreText(score.ToString());
         }
-        else
-        {
-            score += 2;
-        }
-        scoreDisplay.text = "Score: " + score.ToString();
     }
 
     private void GenerateOrder()

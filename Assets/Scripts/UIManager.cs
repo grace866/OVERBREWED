@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public string displayTime;
     public float tempTime;
     public TextMeshProUGUI timeDisplay;
+    public TextMeshProUGUI scoreDisplay;
     public GameObject pauseMenuUI;
     public Button resumeButton;
     private bool isPaused = false;
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
         displayTime = "2:00";
         pauseMenuUI.SetActive(false); // Initially hide the pause menu
         resumeButton.onClick.AddListener(Resume);
+        scoreDisplay.text = "Score: 0";
 
     }
 
@@ -52,10 +54,16 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void updateText(string type, int amt)
+    public void updateOrderText(string type, string sugar)
     {
-        currOrder.text = "Current Order: \n Milk:" + type + "\n MilkAmt: " + amt;
+        currOrder.text = "Current Order: \n Milk:" + type + "\n MilkAmt: " + sugar;
     }
+
+    public void updateScoreText(String newScore)
+    {
+        scoreDisplay.text = "Score: " + newScore;
+    }
+
 
     public void Pause()
     {
