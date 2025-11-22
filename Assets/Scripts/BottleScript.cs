@@ -7,7 +7,7 @@ public class BottleScript : MonoBehaviour
     GameObject player;
     bool playerIsClose = false;
     //public GameObject bottleHeld = null;
-    bool holdingBottle = false;
+    public bool holdingBottle = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,6 +58,7 @@ public class BottleScript : MonoBehaviour
         if (ps == null || !ps.CanHoldItem()) return;
 
         ps.HoldItem(gameObject);   // this snaps to holdPoint, the hand cube i added on Egg
+        Debug.Log("holding bottle");
         holdingBottle = true;
     }
 
@@ -79,4 +80,5 @@ public class BottleScript : MonoBehaviour
 
         holdingBottle = false;
     }
+
 }

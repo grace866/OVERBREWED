@@ -12,12 +12,13 @@ public class MugScript : MonoBehaviour
     public Renderer mugRenderer;
     // Start is called before the first frame update
     private Vector3 originalPosition;
-    bool holdingBottle = false;
+    //bool holdingBottle = false;
     GameObject bottle;
     bool filling = false;
     public Transform milkLiquid;
     public float fillSpeed = 0.5f;
     public float maxFillHeight = 1.0f;
+    BottleScript bs;
 
     void Start()
     {
@@ -44,9 +45,9 @@ public class MugScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P)) {
             Debug.Log("P pressed");
-            Debug.Log(holdingBottle);
+            //Debug.Log(holdingBottle);
             Debug.Log(playerIsClose);
-            if (holdingBottle && playerIsClose)
+            if (playerIsClose && bs.holdingBottle)
             {
                 PourMilk();
             }
@@ -55,7 +56,7 @@ public class MugScript : MonoBehaviour
         //Debug.Log(Input.GetKey(KeyCode.P) + "P is being held");
         //Debug.Log(holdingBottle + "bottle is being held");
         //Debug.Log(playerIsClose + "player is close");
-        filling = Input.GetKey(KeyCode.P) && holdingBottle && playerIsClose;
+        filling = Input.GetKey(KeyCode.P) && bs.holdingBottle && playerIsClose;
 
 
         if (filling)
@@ -85,7 +86,14 @@ public class MugScript : MonoBehaviour
         {
             Debug.Log("holding bottle");
             bottle = other.gameObject;
-            holdingBottle = true;
+            //holdingBottle = true;
+        }
+        if (other.CompareTag("Whole") ||
+            other.CompareTag("Almond") ||
+            other.CompareTag("Oat"))
+        {
+            Debug.Log("found bottle script");
+            bs = other.GetComponent<BottleScript>();
         }
     }
     
