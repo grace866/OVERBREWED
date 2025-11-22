@@ -37,11 +37,11 @@ public class GameManagerScript : MonoBehaviour
         currOrder = orders[0];
         string milk;
         string sugar;
-        if (currOrder.milk == 0) milk = "None";
+        if (currOrder.milk == 0) milk = "No";
         else if (currOrder.milk == 1) milk = "Whole";
         else if (currOrder.milk == 2) milk = "Almond";
         else milk = "Oat";
-        if (currOrder.sugar == 1) sugar = "Sugar added";
+        if (currOrder.sugar == 1) sugar = "Add sugar";
         else sugar = "No sugar";
         UIManager.updateOrderText(milk, sugar);
     }
