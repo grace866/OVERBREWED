@@ -25,6 +25,7 @@ public class MugSpawner : MonoBehaviour
         }
         var position = spawnPoint.position;
         var rotation = spawnPoint.rotation;
+        Debug.Log("spawned successfully");
         Instantiate(mug, position, rotation);
     }
 
