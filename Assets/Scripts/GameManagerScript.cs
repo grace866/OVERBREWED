@@ -71,6 +71,7 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log(lastOrder.milk);
         Debug.Log(lastOrder.sugar);
         foreach (int c in contents) Debug.Log(c);
+        Debug.Log(contents.Count);
         if (lastOrder.milk == contents[0] && contents[2] == 1 && lastOrder.sugar == contents[1])
         {
             score += 1;
