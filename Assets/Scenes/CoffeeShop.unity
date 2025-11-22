@@ -350,6 +350,9 @@ MonoBehaviour:
   contents: 
   mugHeld: {fileID: 0}
   mugRenderer: {fileID: 0}
+  milkLiquid: {fileID: 0}
+  fillSpeed: 0.5
+  maxFillHeight: 1
 --- !u!65 &50332884
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2376,6 +2379,9 @@ MonoBehaviour:
   contents: 
   mugHeld: {fileID: 0}
   mugRenderer: {fileID: 0}
+  milkLiquid: {fileID: 0}
+  fillSpeed: 0.5
+  maxFillHeight: 1
 --- !u!65 &579576883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2695,6 +2701,79 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.019999998, y: 0.019999996, z: 0.07908309}
   m_Center: {x: 0.0000000055879354, y: -0.0000000035012315, z: 0.029541545}
+--- !u!1 &678496893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678496895}
+  - component: {fileID: 678496894}
+  - component: {fileID: 678496896}
+  m_Layer: 5
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &678496894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678496893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb82fafe3e31a6408773b7e7f294895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 396734668}
+  score: 0
+  UIManager: {fileID: 678496896}
+--- !u!224 &678496895
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678496893}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 380.5, y: 227.75}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &678496896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678496893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f03bc173cd0784155be6aea5bc932f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currOrder: {fileID: 989527722}
+  time: 120
+  runningTime: 0
+  displayTime: 
+  tempTime: 0
+  timeDisplay: {fileID: 1561263748}
+  scoreDisplay: {fileID: 428749415}
+  pauseMenuUI: {fileID: 1090107221}
+  resumeButton: {fileID: 245100822}
 --- !u!1 &680192097
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,6 +4012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 396734668}
   score: 0
+  UIManager: {fileID: 678496896}
 --- !u!65 &967698540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4762,13 +4842,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090107221}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 245100821}
-  m_Father: {fileID: 1588822414}
+  m_Father: {fileID: 1521548036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6076,6 +6156,7 @@ Transform:
   m_Children:
   - {fileID: 479145571}
   - {fileID: 848794955}
+  - {fileID: 1090107225}
   - {fileID: 1588822414}
   - {fileID: 1221679178}
   m_Father: {fileID: 0}
@@ -6389,7 +6470,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 428749413}
-  - {fileID: 1090107225}
   m_Father: {fileID: 1521548036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6584,6 +6664,9 @@ MonoBehaviour:
   contents: 
   mugHeld: {fileID: 0}
   mugRenderer: {fileID: 0}
+  milkLiquid: {fileID: 0}
+  fillSpeed: 0.5
+  maxFillHeight: 1
 --- !u!65 &1666000362
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7143,6 +7226,9 @@ MonoBehaviour:
   contents: 
   mugHeld: {fileID: 0}
   mugRenderer: {fileID: 0}
+  milkLiquid: {fileID: 0}
+  fillSpeed: 0.5
+  maxFillHeight: 1
 --- !u!65 &1901304243
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7654,3 +7740,4 @@ SceneRoots:
   - {fileID: 1281071518}
   - {fileID: 1521548036}
   - {fileID: 594715863}
+  - {fileID: 678496895}

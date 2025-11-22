@@ -14,12 +14,13 @@ public class GameManagerScript : MonoBehaviour
     public int score;
     //public TextMeshProUGUI scoreDisplay;
     private OrderScript currOrder;
-    private UIManager UIManager;
+    public UIManager UIManager;
     private bool isOrderCorrect = false;
 
     private void Start()
     {
         orders = new List<OrderScript>();
+        //UIManager = GetComponent<UIManager>();
         GenerateOrder();
         player = GameObject.FindWithTag("Player");
 
