@@ -21,7 +21,7 @@ public class MugScript : MonoBehaviour
 
     void Start()
     {
-        contents = new List<int> { 0, 0 };
+        contents = new List<int> { 0, 0, 0 };
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log("Player found: " + player); // this should not be null
         originalPosition = this.transform.position;
@@ -52,7 +52,11 @@ public class MugScript : MonoBehaviour
             }
         }
 
+        //Debug.Log(Input.GetKey(KeyCode.P) + "P is being held");
+        //Debug.Log(holdingBottle + "bottle is being held");
+        //Debug.Log(playerIsClose + "player is close");
         filling = Input.GetKey(KeyCode.P) && holdingBottle && playerIsClose;
+
 
         if (filling)
         {

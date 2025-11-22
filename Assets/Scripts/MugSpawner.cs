@@ -16,7 +16,7 @@ public class MugSpawner : MonoBehaviour
         LoadAllPrefabs();
     }
 
-    void RespawnMug()
+    public void RespawnMug()
     {
         if(!mug)
         {

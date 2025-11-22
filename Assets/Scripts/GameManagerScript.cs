@@ -15,6 +15,7 @@ public class GameManagerScript : MonoBehaviour
     //public TextMeshProUGUI scoreDisplay;
     private OrderScript currOrder;
     public UIManager UIManager;
+    // public MugSpawner mugSpawner;
     private bool isOrderCorrect = false;
 
     private void Start()
@@ -60,6 +61,7 @@ public class GameManagerScript : MonoBehaviour
             orders.RemoveAt(0);
             UpdateCurrOrder();
             Debug.Log("Mug placed on the counter!");
+            // mugSpawner.RespawnMug();
         }
     }
 
@@ -69,6 +71,7 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log(lastOrder.milk);
         Debug.Log(lastOrder.sugar);
         foreach (int c in contents) Debug.Log(c);
+        Debug.Log(contents.Count);
         if (lastOrder.milk == contents[0] && contents[2] == 1 && lastOrder.sugar == contents[1])
         {
             score += 1;
