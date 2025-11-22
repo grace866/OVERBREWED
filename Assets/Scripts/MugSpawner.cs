@@ -16,7 +16,7 @@ public class MugSpawner : MonoBehaviour
         LoadAllPrefabs();
     }
 
-    void RespawnMug()
+    /*void RespawnMug()
     {
         if(!mug)
         {
@@ -24,7 +24,7 @@ public class MugSpawner : MonoBehaviour
             var position = spawnPoint.position;
             Instantiate(mug, position);
         }
-    }
+    }*/
 
     
     // Load all prefabs from Resources/Prefabs folder
