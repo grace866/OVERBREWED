@@ -77,7 +77,7 @@ public class MugScript : MonoBehaviour
         {
             playerIsClose = true;
         }
-        if (other.gameObject.tag == "Bottle")
+        if (other.gameObject.tag == "Whole")
         {
             Debug.Log("holding bottle");
             bottle = other.gameObject;
