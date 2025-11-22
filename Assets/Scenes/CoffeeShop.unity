@@ -905,7 +905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 396734668}
-  progressBar: {fileID: 0}
+  progressBar: {fileID: 1995801475}
   currentMug: {fileID: 0}
   holdPoint: {fileID: 947940247}
 --- !u!4 &255524983 stripped
