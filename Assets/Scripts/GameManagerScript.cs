@@ -21,7 +21,7 @@ public class GameManagerScript : MonoBehaviour
     private void Start()
     {
         orders = new List<OrderScript>();
-        UIManager = GetComponent<UIManager>();
+        //UIManager = GetComponent<UIManager>();
         GenerateOrder();
         player = GameObject.FindWithTag("Player");
 
