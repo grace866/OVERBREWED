@@ -5,12 +5,25 @@ using UnityEngine;
 public class MugSpawner : MonoBehaviour
 {
     public string prefabFolderPath = "Prefabs";  // Path to prefabs in Resources folder (relative to "Assets/Resources/")
-    private Dictionary<int, GameObject> prefabDictionary = new();
+    // private Dictionary<int, GameObject> prefabDictionary = new();
     public List<int> Servable = new();
+
+    [SerializeField] GameObject mug;
+    [SerializeField] Transform spawnPoint;
 
     void Start()
     {
         LoadAllPrefabs();
+    }
+
+    void RespawnMug()
+    {
+        if(!mug)
+        {
+            Debug.LogWarning("didn't put in the mug prefab yet");
+            var position = spawnPoint.position;
+            Instantiate(mug, position);
+        }
     }
 
     
