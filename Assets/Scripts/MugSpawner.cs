@@ -18,13 +18,14 @@ public class MugSpawner : MonoBehaviour
 
     /*void RespawnMug()
     {
-        if(!mug)
-        {
-            Debug.LogWarning("didn't put in the mug prefab yet");
-            var position = spawnPoint.position;
-            Instantiate(mug, position);
-        }
-    }*/
+        //if(!mug)
+        //{
+        //    Debug.LogWarning("didn't put in the mug prefab yet");
+        //    var position = spawnPoint.position;
+        //    Instantiate(mug, position);
+        //}
+    }
+>>>>>>> 29770a1ad8530ea37351d4c13fbb819f28500ee7
 
     
     // Load all prefabs from Resources/Prefabs folder
@@ -64,5 +65,5 @@ public class MugSpawner : MonoBehaviour
         {
             Debug.LogError($"No prefab found for item ID {itemID}");
         }*/
-    }
+}
 }

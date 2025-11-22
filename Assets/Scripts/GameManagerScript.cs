@@ -43,8 +43,8 @@ public class GameManagerScript : MonoBehaviour
         if (currOrder.sugar == 1) sugar = "Sugar added";
         else sugar = "No sugar";
         UIManager.updateOrderText(milk, sugar);
-
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Mug"))
