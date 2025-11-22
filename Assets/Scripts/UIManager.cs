@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     public void updateOrderText(string type, string sugar)
     {
-        currOrder.text = "Current Order: \n" + type + " Milk \n" + sugar;
+        currOrder.text = "Current Order: \n" + type + " milk \n" + sugar;
     }
 
     public void updateScoreText(String newScore)
