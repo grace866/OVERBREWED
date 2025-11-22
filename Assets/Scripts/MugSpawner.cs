@@ -18,12 +18,12 @@ public class MugSpawner : MonoBehaviour
 
     void RespawnMug()
     {
-        if(!mug)
-        {
-            Debug.LogWarning("didn't put in the mug prefab yet");
-            var position = spawnPoint.position;
-            Instantiate(mug, position);
-        }
+        //if(!mug)
+        //{
+        //    Debug.LogWarning("didn't put in the mug prefab yet");
+        //    var position = spawnPoint.position;
+        //    Instantiate(mug, position);
+        //}
     }
 
     
