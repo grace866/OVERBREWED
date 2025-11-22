@@ -21,7 +21,7 @@ public class MugScript : MonoBehaviour
 
     void Start()
     {
-        contents = new List<int> { 0, 0 };
+        contents = new List<int> { 0, 0, 0 };
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log("Player found: " + player); // this should not be null
         originalPosition = this.transform.position;
