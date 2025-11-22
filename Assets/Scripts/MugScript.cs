@@ -52,7 +52,11 @@ public class MugScript : MonoBehaviour
             }
         }
 
+        //Debug.Log(Input.GetKey(KeyCode.P) + "P is being held");
+        //Debug.Log(holdingBottle + "bottle is being held");
+        //Debug.Log(playerIsClose + "player is close");
         filling = Input.GetKey(KeyCode.P) && holdingBottle && playerIsClose;
+
 
         if (filling)
         {
