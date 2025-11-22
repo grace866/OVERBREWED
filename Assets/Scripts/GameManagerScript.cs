@@ -15,13 +15,13 @@ public class GameManagerScript : MonoBehaviour
     //public TextMeshProUGUI scoreDisplay;
     private OrderScript currOrder;
     public UIManager UIManager;
-    // public MugSpawner mugSpawner;
+    public MugSpawner mugSpawner;
     private bool isOrderCorrect = false;
 
     private void Start()
     {
         orders = new List<OrderScript>();
-        //UIManager = GetComponent<UIManager>();
+        UIManager = GetComponent<UIManager>();
         GenerateOrder();
         player = GameObject.FindWithTag("Player");
 
@@ -61,7 +61,7 @@ public class GameManagerScript : MonoBehaviour
             orders.RemoveAt(0);
             UpdateCurrOrder();
             Debug.Log("Mug placed on the counter!");
-            // mugSpawner.RespawnMug();
+            mugSpawner.RespawnMug();
         }
     }
 
