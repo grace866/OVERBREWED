@@ -14,6 +14,10 @@ public class MugScript : MonoBehaviour
     private Vector3 originalPosition;
     bool holdingBottle = false;
     GameObject bottle;
+    bool filling = false;
+    public Transform milkLiquid;
+    public float fillSpeed = 0.5f;
+    public float maxFillHeight = 1.0f;
 
     void Start()
     {
@@ -46,6 +50,16 @@ public class MugScript : MonoBehaviour
             {
                 PourMilk();
             }
+        }
+
+        filling = Input.GetKey(KeyCode.P) && holdingBottle && playerIsClose;
+
+        if (filling)
+        {
+            Debug.Log("filling");
+            Vector3 scale = milkLiquid.localScale;
+            scale.y = Mathf.Clamp(scale.y + (fillSpeed * Time.deltaTime), 0, maxFillHeight);
+            milkLiquid.localScale = scale;
         }
     }
 
