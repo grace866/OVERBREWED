@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     Animator animator;
     CharacterController controller;
 
-    private GameObject heldItem = null;
+    public GameObject heldItem = null;
     public Transform holdPoint; // Assign an empty GameObject as the hand position
 
     public Transform playerBody;

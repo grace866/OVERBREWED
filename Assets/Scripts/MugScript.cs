@@ -18,7 +18,7 @@ public class MugScript : MonoBehaviour
     public Transform milkLiquid;
     public float fillSpeed = 0.5f;
     public float maxFillHeight = 1.0f;
-    BottleScript bs;
+    bool holdingBottle = false;
 
     void Start()
     {
@@ -47,8 +47,11 @@ public class MugScript : MonoBehaviour
             Debug.Log("P pressed");
             //Debug.Log(holdingBottle);
             Debug.Log(playerIsClose);
-            if (playerIsClose && bs.holdingBottle)
+            holdingBottle = player.GetComponent<PlayerScript>().heldItem != null
+                     && (player.GetComponent<PlayerScript>().heldItem.CompareTag("Whole"));
+            if (playerIsClose && holdingBottle)
             {
+                Debug.Log("milk poured");
                 PourMilk();
             }
         }
@@ -56,7 +59,8 @@ public class MugScript : MonoBehaviour
         //Debug.Log(Input.GetKey(KeyCode.P) + "P is being held");
         //Debug.Log(holdingBottle + "bottle is being held");
         //Debug.Log(playerIsClose + "player is close");
-        filling = Input.GetKey(KeyCode.P) && bs.holdingBottle && playerIsClose;
+        
+        filling = Input.GetKey(KeyCode.P) && holdingBottle && playerIsClose;
 
 
         if (filling)
@@ -87,13 +91,6 @@ public class MugScript : MonoBehaviour
             Debug.Log("holding bottle");
             bottle = other.gameObject;
             //holdingBottle = true;
-        }
-        if (other.CompareTag("Whole") ||
-            other.CompareTag("Almond") ||
-            other.CompareTag("Oat"))
-        {
-            Debug.Log("found bottle script");
-            bs = other.GetComponent<BottleScript>();
         }
     }
     
