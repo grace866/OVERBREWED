@@ -151,7 +151,7 @@ MonoBehaviour:
   contents: 
   mugHeld: {fileID: 0}
   mugRenderer: {fileID: 0}
-  milkLiquid: {fileID: 0}
+  milkLiquid: {fileID: 6610306484321377740, guid: f364f59bd298449008f262c9987f878f, type: 3}
   fillSpeed: 0.5
   maxFillHeight: 1
 --- !u!65 &3003986858645003552
@@ -210,5 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabFolderPath: Prefabs
   Servable: 
-  mug: {fileID: 0}
-  spawnPoint: {fileID: 0}
+  mug: {fileID: 179034410088524874}
+  spawnPoint: {fileID: 6959342431935067469, guid: 3ced8e610b33941f1954b1b415f3aeb0, type: 3}
+  maxMugs: 1
+  activeMugs: []
