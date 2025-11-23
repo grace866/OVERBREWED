@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -40,7 +41,8 @@ public class UIManager : MonoBehaviour
             if (tempTime >= 1f)
             {
                 time--;
-                displayTime = Mathf.Floor(time / 60).ToString() + ":" + (time % 60);
+                if (time % 60 < 10) displayTime = Mathf.Floor(time / 60).ToString() + ":0" + (time % 60);
+                else displayTime = Mathf.Floor(time / 60).ToString() + ":" + (time % 60);
                 tempTime = 0f;
                 timeDisplay.text = displayTime;
                 if (time == 0f) runningTime = false;
@@ -50,6 +52,7 @@ public class UIManager : MonoBehaviour
         {
             displayTime = "0:00";
             timeDisplay.text = displayTime;
+            SceneManager.LoadScene("Results");
         }
         Console.WriteLine(displayTime);
 
