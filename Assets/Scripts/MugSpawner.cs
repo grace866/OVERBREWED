@@ -18,25 +18,25 @@ public class MugSpawner : MonoBehaviour
         LoadAllPrefabs();
     }
 
-    public void RespawnMug()
+    public GameObject RespawnMug()
     {
         if(!mug)
         {
            Debug.LogWarning("didn't put in the mug prefab yet");
-           return;
+           return null;
         }
 
         if (activeMugs.Count >= maxMugs)
         {
             Debug.Log("max mugs reached");
-            return;
+            return null;
         }
         var position = spawnPoint.position;
         var rotation = spawnPoint.rotation;
         Debug.Log("spawned successfully");
         var newMug = Instantiate(mug, position, rotation);
         activeMugs.Add(newMug);
-        return;
+        return newMug;
     }
 
     public void UnregisterMug(GameObject mugInstance) => activeMugs.Remove(mugInstance);
