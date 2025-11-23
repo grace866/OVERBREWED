@@ -6770,6 +6770,10 @@ PrefabInstance:
       propertyPath: mugRenderer
       value: 
       objectReference: {fileID: 738843819}
+    - target: {fileID: 3003986858645003552, guid: 062ef2bfb1c8c4e018682134975f7b1a, type: 3}
+      propertyPath: m_Size.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7392960788591456125, guid: 062ef2bfb1c8c4e018682134975f7b1a, type: 3}
       propertyPath: mug
       value: 
