@@ -82,7 +82,7 @@ public class CoffeeMachineScript : MonoBehaviour
         }
         isCoffeeReady = true;
         isBrewing = false;
-        currentMug.ChangeMugColor(Color.red);
+        //currentMug.ChangeMugColor(Color.white);
         progressBar.gameObject.SetActive(false);
         Debug.Log("Coffee is ready! Pick it up.");
         EjectMugFromMachine();
