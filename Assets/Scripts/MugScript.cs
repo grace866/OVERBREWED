@@ -48,7 +48,9 @@ public class MugScript : MonoBehaviour
             //Debug.Log(holdingBottle);
             Debug.Log(playerIsClose);
             holdingBottle = player.GetComponent<PlayerScript>().heldItem != null
-                     && (player.GetComponent<PlayerScript>().heldItem.CompareTag("Whole"));
+                     && ((player.GetComponent<PlayerScript>().heldItem.CompareTag("Whole")) ||
+                     (player.GetComponent<PlayerScript>().heldItem.CompareTag("Almond")) ||
+                     (player.GetComponent<PlayerScript>().heldItem.CompareTag("Oat")));
             if (playerIsClose && holdingBottle)
             {
                 Debug.Log("milk poured");
@@ -91,6 +93,14 @@ public class MugScript : MonoBehaviour
             Debug.Log("holding bottle");
             bottle = other.gameObject;
             //holdingBottle = true;
+        }
+        if (other.gameObject.tag == "Almond")
+        {
+            bottle = other.gameObject;
+        }
+        if (other.gameObject.tag == "Oat")
+        {
+            bottle = other.gameObject;
         }
     }
     
