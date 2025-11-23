@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CoffeeMachineScript : MonoBehaviour
 {
     public GameObject player;
-    public Slider progressBar;
+    //public Slider progressBar;
     private bool isBrewing = false;
     private bool isCoffeeReady = false;
     private float brewingTime = 5f;
@@ -24,12 +24,12 @@ public class CoffeeMachineScript : MonoBehaviour
 
     private void Start() {
         player = GameObject.FindWithTag("Player");
-        if (progressBar != null)
-        {
-            progressBar.maxValue = brewingTime;
-            progressBar.gameObject.SetActive(false);
-            progressBar.value = 0f;
-        }
+        //if (progressBar != null)
+        //{
+        //    progressBar.maxValue = brewingTime;
+        //    progressBar.gameObject.SetActive(false);
+        //    progressBar.value = 0f;
+        //}
     }
 
     private void Update()
@@ -61,8 +61,8 @@ public class CoffeeMachineScript : MonoBehaviour
         Debug.Log("brewing started");
         isBrewing = true;
         brewingProgress = 0f;
-        progressBar.gameObject.SetActive(true);
-        progressBar.value = 0f;
+        //progressBar.gameObject.SetActive(true);
+        //progressBar.value = 0f;
         StartCoroutine(BrewCoffee());
         // need to add snapping to machine
 
@@ -72,7 +72,7 @@ public class CoffeeMachineScript : MonoBehaviour
     {
         isBrewing = false;
         brewingProgress = 0f;
-        progressBar.gameObject.SetActive(false);
+        //progressBar.gameObject.SetActive(false);
     }
 
     private IEnumerator BrewCoffee()
@@ -81,13 +81,13 @@ public class CoffeeMachineScript : MonoBehaviour
         while (brewingProgress < brewingTime)
         {
             brewingProgress += Time.deltaTime;
-            progressBar.value = brewingProgress;
+            //progressBar.value = brewingProgress;
             yield return null;
         }
         isCoffeeReady = true;
         isBrewing = false;
         //currentMug.ChangeMugColor(Color.white);
-        progressBar.gameObject.SetActive(false);
+        //progressBar.gameObject.SetActive(false);
         Debug.Log("Coffee is ready! Pick it up.");
         EjectMugFromMachine();
     }
