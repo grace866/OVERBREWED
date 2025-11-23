@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    Animator animator;
+    public Animator animator;
     CharacterController controller;
 
     public GameObject heldItem = null;
@@ -57,6 +57,9 @@ public class PlayerScript : MonoBehaviour
         float v = Input.GetAxis("Vertical");
 
         Vector3 input = new Vector3(h, 0f, v).normalized;
+
+        animator.SetBool("isWalking", input != Vector3.zero);
+
         Vector3 horiz = input * speed;          // m/s
 
         if (controller.isGrounded && velocity.y < 0f) velocity.y = -2f;
@@ -66,6 +69,8 @@ public class PlayerScript : MonoBehaviour
         controller.Move(disp);
 
         if (input != Vector3.zero) playerBody.forward = -input;
+
+
 
         // float horizontalInput = Input.GetAxis("Horizontal");
         // float verticalInput = Input.GetAxis("Vertical");
