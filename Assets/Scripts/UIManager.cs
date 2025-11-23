@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
                 displayTime = Mathf.Floor(time / 60).ToString() + ":" + (time % 60);
                 tempTime = 0f;
                 timeDisplay.text = displayTime;
+                if (time == 0f) runningTime = false;
             }
         }
         else
