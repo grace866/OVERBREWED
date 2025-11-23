@@ -61,8 +61,8 @@ public class GameManagerScript : MonoBehaviour
             orders.RemoveAt(0);
             UpdateCurrOrder();
             Debug.Log("Mug placed on the counter!");
-            mugSpawner.RespawnMug();
             mugSpawner.UnregisterMug(other.gameObject);
+            mugSpawner.RespawnMug();
             Destroy(other.gameObject);
         }
     }
