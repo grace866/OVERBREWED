@@ -14,6 +14,7 @@ public class MugScript : MonoBehaviour
     private Vector3 originalPosition;
     //bool holdingBottle = false;
     GameObject bottle;
+    GameObject sugar;
     bool filling = false;
     public Transform milkLiquid;
     public float fillSpeed = 0.5f;
@@ -23,6 +24,7 @@ public class MugScript : MonoBehaviour
     void Start()
     {
         contents = new List<int> { 0, 0, 0 };
+        contents[1] = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log("Player found: " + player); // this should not be null
         originalPosition = this.transform.position;
@@ -102,6 +104,10 @@ public class MugScript : MonoBehaviour
         {
             bottle = other.gameObject;
         }
+        if (other.gameObject.tag == "sugar")
+        {
+            sugar = other.gameObject;
+        }
     }
     
     private void OnTriggerStay(Collider other)  
@@ -158,6 +164,15 @@ public class MugScript : MonoBehaviour
         } else if (bottle.tag == "Oat")
         {
             contents[0] = 3;
+        }
+    }
+
+    void AddSugar()
+    {
+        Debug.Log("added sugar");
+        if (sugar.tag == "sugar")
+        {
+            contents[1] = 1;
         }
     }
 
