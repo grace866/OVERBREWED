@@ -154,6 +154,11 @@ public class MugScript : MonoBehaviour
 
     void PourMilk()
     {
+        if (!bottle)
+        {
+            Debug.LogWarning("No bottle to pour from");
+            return;
+        }
         Debug.Log("added milk");
         if (bottle.tag == "Whole")
         {
