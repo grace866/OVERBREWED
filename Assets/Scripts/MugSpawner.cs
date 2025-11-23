@@ -10,6 +10,8 @@ public class MugSpawner : MonoBehaviour
 
     [SerializeField] GameObject mug;
     [SerializeField] Transform spawnPoint;
+    [SerializeField] int maxMugs = 1;
+    public List<GameObject> activeMugs = new();
 
     void Start()
     {
@@ -23,10 +25,18 @@ public class MugSpawner : MonoBehaviour
            Debug.LogWarning("didn't put in the mug prefab yet");
            return;
         }
+
+        if (activeMugs.Count >= maxMugs)
+        {
+            Debug.Log("max mugs reached");
+            return;
+        }
         var position = spawnPoint.position;
         var rotation = spawnPoint.rotation;
         Debug.Log("spawned successfully");
-        Instantiate(mug, position, rotation);
+        var newMug = Instantiate(mug, position, rotation);
+        activeMugs.Add(newMug);
+        return;
     }
 
 
