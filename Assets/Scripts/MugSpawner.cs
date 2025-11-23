@@ -39,6 +39,7 @@ public class MugSpawner : MonoBehaviour
         return;
     }
 
+    public void UnregisterMug(GameObject mugInstance) => activeMugs.Remove(mugInstance);
 
     
     // Load all prefabs from Resources/Prefabs folder
