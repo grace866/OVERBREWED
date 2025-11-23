@@ -13,8 +13,12 @@ public class CoffeeMachineScript : MonoBehaviour
     private float brewingProgress = 0f;
     private bool isInRange = false;
     private bool isKeyHeld = false;
+    public Renderer milkRenderer;
 
     public MugScript currentMug = null;
+    public MeshRenderer liquid = null;
+   
+   
     [Header("Placement")]
     public Transform holdPoint; // point where mug is placed in the machine
 
@@ -82,7 +86,7 @@ public class CoffeeMachineScript : MonoBehaviour
         }
         isCoffeeReady = true;
         isBrewing = false;
-        currentMug.ChangeMugColor(Color.red);
+        //currentMug.ChangeMugColor(Color.white);
         progressBar.gameObject.SetActive(false);
         Debug.Log("Coffee is ready! Pick it up.");
         EjectMugFromMachine();
@@ -119,6 +123,8 @@ public class CoffeeMachineScript : MonoBehaviour
         //mug.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
 
         currentMug = mug;
+        liquid = currentMug.transform.GetChild(1).GetComponent<MeshRenderer>();
+        
         return true;
     }
 
@@ -151,6 +157,12 @@ public class CoffeeMachineScript : MonoBehaviour
             //rb.linearVelocity = Vector3.down * 0.5f;
         }
 
+        /*if (milkRenderer != null)
+        {
+            milkRenderer.material.color = 
+        }*/
+
+        liquid.material.color = new Color(0.31f, 0.216f, 0.2f, 1);
         currentMug = null;
     }
 
