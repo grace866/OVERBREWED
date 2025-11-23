@@ -2105,17 +2105,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563159966}
   m_CullTransparentMesh: 1
---- !u!1 &579576876 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 179034410088524874, guid: 062ef2bfb1c8c4e018682134975f7b1a, type: 3}
-  m_PrefabInstance: {fileID: 606028327798417785}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &579576877 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7392960788591456125, guid: 062ef2bfb1c8c4e018682134975f7b1a, type: 3}
   m_PrefabInstance: {fileID: 606028327798417785}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579576876}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d3d583689d55444882ded0c3764de88, type: 3}
@@ -6778,7 +6773,7 @@ PrefabInstance:
     - target: {fileID: 7392960788591456125, guid: 062ef2bfb1c8c4e018682134975f7b1a, type: 3}
       propertyPath: mug
       value: 
-      objectReference: {fileID: 579576876}
+      objectReference: {fileID: 179034410088524874, guid: 062ef2bfb1c8c4e018682134975f7b1a, type: 3}
     - target: {fileID: 7392960788591456125, guid: 062ef2bfb1c8c4e018682134975f7b1a, type: 3}
       propertyPath: spawnPoint
       value: 
