@@ -33,6 +33,42 @@ public class MugScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // --- Sugar insert (press E while holding a sugar cube near the mug) ---
+        if (playerIsClose && Input.GetKeyDown(KeyCode.E))
+        {
+            // NOTE: assumes PlayerScript exposes heldItem (as used elsewhere in this file).
+            var ps = player ? player.GetComponent<PlayerScript>() : null;
+            var held = (ps != null) ? ps.heldItem : null;
+
+            bool holdingSugar = held != null && (held.CompareTag("sugar"));
+
+            if (holdingSugar)
+            {
+                // If your contents[1] is a sugar flag (0/1), set it here.
+                if (contents != null)
+                {
+                    if (contents.Count < 2) contents.Add(0);     // safety if list is too short
+                    if (contents[1] == 0)
+                    {
+                        contents[1] = 1;
+                        Debug.Log("Sugar added to mug.");
+                    }
+                    else
+                    {
+                        Debug.Log("Mug already has sugar.");
+                    }
+                }
+
+                // Clear the player's held item and remove the cube
+                // (DropItem may momentarily re-enable physics; destroying right after is fine)
+                ps.DropItem();
+                Destroy(held);
+
+                // IMPORTANT: stop further E-processing this frame so we don't also pick up/drop the mug
+                return;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!holdingMug && playerIsClose)
@@ -74,6 +110,8 @@ public class MugScript : MonoBehaviour
             scale.y = Mathf.Clamp(scale.y + (fillSpeed * Time.deltaTime), 0, maxFillHeight);
             milkLiquid.localScale = scale;
         }
+
+        if (Input.GetKeyDown(KeyCode.C)) Debug.Log($"[Mug] contents=[{string.Join(",", contents)}]");
     }
 
     public void ChangeMugColor(Color newColor)
