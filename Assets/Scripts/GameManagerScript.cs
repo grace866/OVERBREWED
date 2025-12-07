@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem.Controls;
-using UnityEditor.Build.Player;
 
 public class GameManagerScript : MonoBehaviour
 //IInteractable
