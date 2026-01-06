@@ -12,13 +12,11 @@ public class MugScript : MonoBehaviour
     public Renderer mugRenderer;
     // Start is called before the first frame update
     private Vector3 originalPosition;
-    //bool holdingBottle = false;
-    GameObject bottle;
     GameObject sugar;
     bool filling = false;
     public Transform milkLiquid;
-    public float fillSpeed = 0.5f;
-    public float maxFillHeight = 1.0f;
+    public float fillSpeed;
+    public float maxFillHeight;
     bool holdingBottle = false;
 
     void Start()
@@ -42,7 +40,7 @@ public class MugScript : MonoBehaviour
 
             bool holdingSugar = held != null && (held.CompareTag("sugar"));
 
-            if (holdingSugar)
+            if (holdingSugar)        
             {
                 // If your contents[1] is a sugar flag (0/1), set it here.
                 if (contents != null)
@@ -96,9 +94,6 @@ public class MugScript : MonoBehaviour
             }
         }
 
-        //Debug.Log(Input.GetKey(KeyCode.P) + "P is being held");
-        //Debug.Log(holdingBottle + "bottle is being held");
-        //Debug.Log(playerIsClose + "player is close");
         
         filling = Input.GetKey(KeyCode.P) && holdingBottle && playerIsClose;
 
@@ -122,36 +117,10 @@ public class MugScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerIsClose = true;
-        }
-        if (other.gameObject.tag == "Whole")
-        {
-            Debug.Log("holding bottle");
-            bottle = other.gameObject;
-            //holdingBottle = true;
-        }
-        if (other.gameObject.tag == "Almond")
-        {
-            bottle = other.gameObject;
-        }
-        if (other.gameObject.tag == "Oat")
-        {
-            bottle = other.gameObject;
-        }
-        if (other.gameObject.tag == "sugar")
-        {
-            sugar = other.gameObject;
-        }
-    }
-    
     private void OnTriggerStay(Collider other)  
-{
+    {
     if (other.CompareTag("Player")) playerIsClose = true;
-}
+    }
 
     private void OnTriggerExit(Collider other)
     {
@@ -192,30 +161,25 @@ public class MugScript : MonoBehaviour
 
     void PourMilk()
     {
-        if (!bottle)
+        var ps = player.GetComponent<PlayerScript>();
+        if (ps == null || ps.heldItem == null)
         {
-            Debug.LogWarning("No bottle to pour from");
+            Debug.LogWarning("Player not holding any bottle");
             return;
         }
+
+        GameObject held = ps.heldItem;
         Debug.Log("added milk");
-        if (bottle.tag == "Whole")
+
+        if (held.tag == "Whole")
         {
             contents[0] = 1;
-        } else if (bottle.tag == "Almond")
+        } else if (held.tag == "Almond")
         {
             contents[0] = 2;
-        } else if (bottle.tag == "Oat")
+        } else if (held.tag == "Oat")
         {
             contents[0] = 3;
-        }
-    }
-
-    void AddSugar()
-    {
-        Debug.Log("added sugar");
-        if (sugar.tag == "sugar")
-        {
-            contents[1] = 1;
         }
     }
 

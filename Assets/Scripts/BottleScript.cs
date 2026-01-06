@@ -2,20 +2,18 @@ using UnityEngine;
 
 public class BottleScript : MonoBehaviour
 {
-    //public MugScript currentMug = null;
-    // Steps: pick up bottle, have bottle enter mug collider and press button, mug fills with bottle
     GameObject player;
     bool playerIsClose = false;
-    //public GameObject bottleHeld = null;
     public bool holdingBottle = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //for bottle snapping
+    public Transform bottleDropPoint;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -33,7 +31,7 @@ public class BottleScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !holdingBottle)
         {
             playerIsClose = true;
         }
@@ -60,20 +58,31 @@ public class BottleScript : MonoBehaviour
         ps.HoldItem(gameObject);   // this snaps to holdPoint, the hand cube i added on Egg
         Debug.Log("holding bottle");
         holdingBottle = true;
+
+        foreach (var c in GetComponents<Collider>()) c.enabled = false;
+
+        playerIsClose = false;
     }
 
     void PutDownBottle()
     {
         transform.SetParent(null);
 
+        if (bottleDropPoint != null)
+        {
+            transform.position = bottleDropPoint.position;
+            transform.rotation = bottleDropPoint.rotation;
+        }
+
         if (TryGetComponent<Rigidbody>(out var rb))
         {
             rb.isKinematic = false;
             rb.detectCollisions = true;
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
-            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            rb.interpolation = RigidbodyInterpolation.None;
+            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
         }
-        foreach (var c in GetComponents<Collider>()) c.enabled = true;  // re-enable
+
+        foreach (var c in GetComponents<Collider>()) c.enabled = true; 
 
         var ps = player.GetComponent<PlayerScript>();
         if (ps) ps.DropItem();

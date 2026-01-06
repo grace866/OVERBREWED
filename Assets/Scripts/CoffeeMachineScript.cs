@@ -104,8 +104,12 @@ public class CoffeeMachineScript : MonoBehaviour
         var cols = mug.GetComponents<Collider>();
         if (rb)
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            if (!rb.isKinematic)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+
             rb.isKinematic = true;
             rb.detectCollisions = false;
             rb.interpolation = RigidbodyInterpolation.None;
@@ -124,7 +128,7 @@ public class CoffeeMachineScript : MonoBehaviour
 
         currentMug = mug;
         liquid = currentMug.transform.GetChild(1).GetComponent<MeshRenderer>();
-        
+
         return true;
     }
 
@@ -157,12 +161,17 @@ public class CoffeeMachineScript : MonoBehaviour
             //rb.linearVelocity = Vector3.down * 0.5f;
         }
 
-        /*if (milkRenderer != null)
+        if (liquid != null)
         {
-            milkRenderer.material.color = 
-        }*/
+            Debug.Log("Liquid mesh: " + liquid.name);
+            liquid.material.color = new Color(0.31f, 0.216f, 0.2f, 1f);
 
-        liquid.material.color = new Color(0.31f, 0.216f, 0.2f, 1);
+        }
+        else
+        {
+            Debug.LogWarning("Liquid MeshRenderer is null!");
+        }
+        
         currentMug = null;
     }
 

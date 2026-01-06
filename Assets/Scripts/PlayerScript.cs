@@ -139,8 +139,11 @@ public class PlayerScript : MonoBehaviour
 
         if (item.TryGetComponent<Rigidbody>(out var rb)) //key idea is to get the mug and then set its on motion and whatnot to 0 and just snap it to the hand
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            if (!rb.isKinematic)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
 
             rb.isKinematic = true;                                   // no physics so it cant move on its on
             rb.detectCollisions = false;                             // and disable collider 
