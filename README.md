@@ -1,8 +1,7 @@
 # OVERBREWED
-
-## Description
 In Progress: A cafe spin on Overcooked
 
+## Description
 As a busy barista in this fast-paced cafe game, you must complete as many orders as possible in under two minutes. 
 * Customer choices: Each order may ask for whole, almond, or oat milk (top-to-bottom in cafe view) and sugar/no sugar
 * Controls:
