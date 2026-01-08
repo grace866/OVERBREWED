@@ -3,8 +3,8 @@
 ## Description
 In Progress: A cafe spin on Overcooked
 
-As a busy barista in this fast-paced cafe game, you must complete as mamy orders as possible in under two minutes. 
-* Customer choices: Each order may ask for whole, almond, or oat (top-to-bottom in cafe view) and sugar/no sugar
+As a busy barista in this fast-paced cafe game, you must complete as many orders as possible in under two minutes. 
+* Customer choices: Each order may ask for whole, almond, or oat milk (top-to-bottom in cafe view) and sugar/no sugar
 * Controls:
   * E - Pick up items
   * P - Pour milk into the mug (need to bring milk bottle close enough to mug!)
